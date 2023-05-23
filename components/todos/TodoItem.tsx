@@ -1,3 +1,4 @@
+import useTodoList from '@/hooks/useTodolist'
 import { Todo } from '@/types/todos'
 import React from 'react'
 import { styled } from 'styled-components'
@@ -7,7 +8,7 @@ interface Props {
     todo: Todo
 }
 interface StyledProps {
-    completed: boolean
+    completed: string
 }
 const StyledTodoItem = styled.li<StyledProps>`
     display:flex;
@@ -15,15 +16,16 @@ const StyledTodoItem = styled.li<StyledProps>`
     align-items: center;
     border: 1px solid #dcdcdc;
     border-radius: 4px;
-    color: #fff;
+    color: ${({completed}) => completed === 'true' ? '#ccc' : '#fff'};
     gap: 1rem;
     height: 3rem;
     padding: 8px;
-    text-decoration: ${({completed}) => completed ? 'line-through' : 'none'};
+    
     p {
         color: inherit;
         text-decoration: none;
         font-size: 1rem;
+        text-decoration: ${({completed}) => completed === 'true' ? 'line-through' : 'none'};
     }
     span {
         display: block;
@@ -35,13 +37,15 @@ const StyledTodoItem = styled.li<StyledProps>`
         display:flex;
         gap: 0.25rem; 
         button {
+            text-decoration: none;
+
             border: none;
             border-radius: 4px;
             color: #fff;
             font-size: 0.75rem;
             height: 1.25rem;
             padding: 0.25rem;
-            width: 2rem;
+            width: fit-content;
             font-weight: bold;
             cursor: pointer;
         }
@@ -50,7 +54,7 @@ const StyledTodoItem = styled.li<StyledProps>`
         background: #ff0000;
         }
         .edit-button {
-        background: ${({completed}) => completed ? '#00ff00' : '#ffaa00'}
+        background: ${({completed}) => completed === 'true' ?  '#ffaa00' : '#00ff00'}
         }
         
         button:hover {
@@ -60,16 +64,18 @@ const StyledTodoItem = styled.li<StyledProps>`
 `
     
 export default function TodoItem({todo}: Props) {
-  return (
-    <StyledTodoItem key={todo.id} completed={todo.isCompleted}>
-    <p className='todoitem'>{todo.title}</p>
-    <div>
-        <span>{todo.createdAt.substr(0,10)}</span>
-        <div className='button-group'>
-            <button className='edit-button'>{todo.isCompleted ? 'Done' : 'Yet'}</button>
-            <button className='delete-button'>삭제</button>
+        const { onUpdate, onDelete } = useTodoList()
+	
+    return (
+        <StyledTodoItem key={todo.id} completed={todo.isCompleted.toString()}>
+        <p className='todo-item'>{todo.title}</p>
+        <div>
+        <span>{todo.createdAt?.substring(0,10)}</span>
+				<div className='button-group'>
+					<button onClick={() => onUpdate!(todo.isCompleted,todo.id)} className='edit-button'>{todo.isCompleted ? 'Yet' : 'Done'}</button>
+					<button onClick={() => onDelete!(todo.id)} className='delete-button'>삭제</button>
+				</div>
         </div>
-    </div>
-    </StyledTodoItem>
-  )
+        </StyledTodoItem>
+    )
 }

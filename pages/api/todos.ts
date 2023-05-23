@@ -51,7 +51,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             try {
                 await prisma.todos.update({
                     where: {
-                        id: Number(req.query.id),
+                        id: parseInt(req.body.id),
                     },
                     data: {
                         isCompleted: req.body.isCompleted,
@@ -67,7 +67,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         case 'PATCH':
             break
         case 'DELETE':
-            try {
+            try { 
                 await prisma.todos.delete({
                     where: {
                         id: Number(req.query.id),
