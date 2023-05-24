@@ -1,4 +1,6 @@
 import { Container } from "@/components/style/Container";
+import { GetStaticPropsContext } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { styled } from "styled-components";
 
@@ -43,9 +45,11 @@ const StyledRNB = styled.div`
     }
 `
 const CenterSliderBox = styled.div`
+    position: relative;
     display: flex;
-    align-self: flex-start;
-    justify-content: flex-start;
+    flex-direction: row;
+    align-self: center;
+    justify-content: center;
     align-items: center;
     flex: 0.6;
     width: 100%;
@@ -57,8 +61,10 @@ const CenterSliderBox = styled.div`
     position: relative;
     padding: 1rem;
     gap: 1rem;
-    flex-direction: column;
+    padding-top: 4rem;
     p {
+        top:16px;
+        position: absolute;
         font-size: 1.5rem;
         font-weight: bold;
         color: #000;
@@ -72,9 +78,16 @@ const Placeholder = styled.span`
   font-size: 0.8rem;
 `
 
+interface Image {
+  url: string;
+  id: string;
+}
+interface Props {
+  images: Image[];
+}
 
-export default function Home() {
-
+export default function Home({images} : Props) {
+  console.log(images)
   return (
     <Container>
       <Center>
@@ -84,15 +97,28 @@ export default function Home() {
         <Link href="/board">Board</Link>
         <Link href="/image-uploader">Image-UpLoader</Link>
       </StyledLNB>
+      
         <CenterSliderBox>
-        <p>S3 Uploaded Image Carousel</p>
-        
+        <p>S3 Uploaded Image Carousel</p>    
+          {images.map((image) => (
+            <Image key={image.id} width={160} height={160} src={image.url} alt="" />
+          ))}
         </CenterSliderBox>
       <StyledRNB>
         <Placeholder>maybe it will place some post that has many favorite or read</Placeholder>
       </StyledRNB>
       </Center>
-    
     </Container>
   )
+}
+
+export const getStaticProps = async (context:GetStaticPropsContext) => {
+  const response = await fetch('http://localhost:3000/api/imagedb');
+  const data = await response.json();
+  console.log('data',data);
+  return {
+    props: {
+      images: data
+    }
+  } ;
 }

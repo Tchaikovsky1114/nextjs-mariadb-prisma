@@ -47,12 +47,13 @@ export default function useImageLoader() {
 	},[file])
 
 	const postImageUrlToDB = useCallback(async () => {
+		if(!imageUrl) return;
 		await fetch('/api/imagedb', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({imageUrl})
+			body: JSON.stringify({url:imageUrl})
 		});
 	},[imageUrl])
 	

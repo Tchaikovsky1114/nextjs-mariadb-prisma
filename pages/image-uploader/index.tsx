@@ -17,7 +17,7 @@ const ImageUploadInputBox = styled.div`
 `
 
 export default function ImageUploaderPage() {
-    const {imageUrl, selectFile, uploadFileHandler } = useImageLoader();
+    const {imageUrl, selectFile, uploadFileHandler,postImageUrlToDB } = useImageLoader();
 
     console.log(imageUrl);
   return (
@@ -31,7 +31,7 @@ export default function ImageUploaderPage() {
         <Button onClick={uploadFileHandler}>이미지 S3 업로드</Button>
         {imageUrl && <Image width={500} height={500} src={imageUrl} alt="이미지"/>}
 
-        <Button onClick={() => {}}>이미지 DB에 저장 </Button>
+        <Button onClick={postImageUrlToDB}>이미지 DB에 저장</Button>
     </ImageUploaderContainer>
     </>
   )
