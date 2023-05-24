@@ -20,7 +20,7 @@ const StyledButton = styled.button`
 
 interface Props {
     children: React.ReactNode
-    onClick: (e:MouseEvent<HTMLButtonElement>) => Promise<boolean>
+    onClick: (e:MouseEvent<HTMLButtonElement>) => Promise<boolean | void>
 }
 
 export default function Button({onClick,children}:Props) {

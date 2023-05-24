@@ -25,9 +25,6 @@ export default function useImageLoader() {
 				console.error(error);
 		  }
 	},[file])
-
-	
-	
 	const generateImageUrl = useCallback( async () => {
 		const response = await fetch('/api/image', {
 			method: 'POST',
@@ -38,7 +35,6 @@ export default function useImageLoader() {
 		  });
 		  return response;
 	},[file])
-
 	const uploadFileToS3 = useCallback(async (url: string) => {
 		await fetch(url, {
 			method: 'PUT',
@@ -49,12 +45,22 @@ export default function useImageLoader() {
 			body: file
 		})
 	},[file])
-		
+
+	const postImageUrlToDB = useCallback(async () => {
+		await fetch('/api/imagedb', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({imageUrl})
+		});
+	},[imageUrl])
 	
   return {
 	imageUrl,
 	file,
 	selectFile,
 	uploadFileHandler,
+	postImageUrlToDB
   }
 }

@@ -1,11 +1,11 @@
 import { styled } from "styled-components";
 
 export const Container = styled.div`
-  padding-top: 4rem;
+  padding-top: 2.4rem;
   padding-left: 2rem;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   gap: 1rem;
   p{
     color: ${({theme}) => theme.colors.accent};

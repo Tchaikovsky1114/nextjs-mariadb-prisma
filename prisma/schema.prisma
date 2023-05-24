@@ -49,3 +49,20 @@ model Profile {
   userId  Int     @unique
   user    User    @relation(fields: [userId], references: [id])
 }
+
+model ImageUrls {
+  id      Int     @id @default(autoincrement())
+  url     String
+}
+
+// model Likes {
+//   id      Int    @id @default(autoincrement())
+//   postId  Int
+//   userId  Int
+//   post    Posts  @relation(fields: [postId], references: [id])
+//   user    User   @relation(fields: [userId], references: [id])
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+//   @@index([postId], map: "Likes_postId_fkey")
+//   @@index([userId], map: "Likes_userId_fkey")
+// }
