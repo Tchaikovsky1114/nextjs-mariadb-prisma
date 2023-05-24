@@ -8,9 +8,12 @@ const prisma = new PrismaClient()
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
     switch (req.method) {
+        
         case 'GET':
             if (req.query.id) {
+                
                 try {
+                    
                     const post = await prisma.todos.findUnique({
                         where: {
                             id: Number(req.query.id),

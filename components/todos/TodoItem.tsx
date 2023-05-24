@@ -10,7 +10,7 @@ interface Props {
 interface StyledProps {
     completed: string
 }
-const StyledTodoItem = styled.li<StyledProps>`
+const StyledTodoItemContainer = styled.li<StyledProps>`
     display:flex;
     justify-content: space-between;
     align-items: center;
@@ -20,7 +20,7 @@ const StyledTodoItem = styled.li<StyledProps>`
     gap: 1rem;
     height: 3rem;
     padding: 8px;
-    
+    min-width: 100%;
     p {
         color: inherit;
         text-decoration: none;
@@ -38,7 +38,6 @@ const StyledTodoItem = styled.li<StyledProps>`
         gap: 0.25rem; 
         button {
             text-decoration: none;
-
             border: none;
             border-radius: 4px;
             color: #fff;
@@ -65,9 +64,9 @@ const StyledTodoItem = styled.li<StyledProps>`
     
 export default function TodoItem({todo}: Props) {
         const { onUpdate, onDelete } = useTodoList()
-	
+
     return (
-        <StyledTodoItem key={todo.id} completed={todo.isCompleted.toString()}>
+        <StyledTodoItemContainer key={todo.id} completed={todo.isCompleted.toString()}>
         <p className='todo-item'>{todo.title}</p>
         <div>
         <span>{todo.createdAt?.substring(0,10)}</span>
@@ -76,6 +75,6 @@ export default function TodoItem({todo}: Props) {
 					<button onClick={() => onDelete!(todo.id)} className='delete-button'>삭제</button>
 				</div>
         </div>
-        </StyledTodoItem>
+        </StyledTodoItemContainer>
     )
 }

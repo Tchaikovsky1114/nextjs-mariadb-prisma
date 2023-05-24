@@ -12,6 +12,7 @@ export default function Home() {
       <p>My Project</p>
     <Link href="/todos">TodoList</Link>
     <Link href="/board">Board</Link>
+    <Link href="/image-uploader">Image-UpLoader</Link>
     </Container>
   )
 }

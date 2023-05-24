@@ -8,7 +8,9 @@ export default function useTodoList() {
   const { data, error } = useSWR('/api/todos', fetcher, {revalidateOnFocus:false} );
   const { value, onChange,removeInputHandler } = useInput()
 
-  const onSubmit = useCallback( async(e:MouseEvent) => {
+  const onSubmit = useCallback( async() => {
+    if(!value) return false;
+
     try {
         await fetch('/api/todos', {
             method: 'POST',
@@ -23,7 +25,7 @@ export default function useTodoList() {
     } catch (error) {
         throw Error('투두를 저장하는데 실패했습니다.')
     }
-  },[value, removeInputHandler]);
+  },[value]);
 
   const onUpdate = useCallback( async(isCompleted: boolean,id: number) => {
     try {
@@ -42,12 +44,12 @@ export default function useTodoList() {
     },[]);
 
   const onDelete = useCallback(async (id: number) => {
-    console.log('id',id)
+    
     try {
         await fetch('/api/todos?id=' + id, {
             method: 'DELETE',
         });
-        mutate('/api/todos');
+        mutate('/api/todos',false);
         return true;
     } catch (error) {
         throw Error('투두를 삭제하는데 실패하였습니다.')
@@ -55,12 +57,15 @@ export default function useTodoList() {
   },[])
 
   const onKeyDown = useCallback((e:React.KeyboardEvent<HTMLInputElement>) => {
-    if(e.key === 'Enter') {
-        onSubmit(e as unknown as MouseEvent)
+    if(!value) return;
+    console.log('onKeyDown Event is Executed');
+    if(e.keyCode === 13) {
+        e.preventDefault()
+        onSubmit()
+        mutate('/api/todos');
     }
-  },[onSubmit])
-
-
+    
+  },[value,onSubmit])
 
   if (error) return { todos: [], error: 'failed to load' };
   if (!data) return { todos: [], error: null };
