@@ -1,8 +1,11 @@
 import { httpMethod } from "@/types/httpMethod";
 import { mutate } from "swr";
 
-export const httpRequest = (url: string) => (method: httpMethod = httpMethod.GET,bodyObject: any = {}) => (errorMessage: string = '요청이 실패하였습니다') => async (contentType: any = 'application/json') => {
-
+export const httpRequest =
+      (url: string) => 
+      (method: httpMethod = httpMethod.GET,bodyObject: any = {}) =>
+      (errorMessage: string = '요청이 실패하였습니다') =>
+      async (contentType: any = 'application/json') => {
   try {
       const response = await fetch(url, {
           method,
@@ -17,7 +20,7 @@ export const httpRequest = (url: string) => (method: httpMethod = httpMethod.GET
         mutate(url);
       }
         return response;
-  } catch (error:any) {
+  } catch (error) {
       throw Error(errorMessage)
   }
 }

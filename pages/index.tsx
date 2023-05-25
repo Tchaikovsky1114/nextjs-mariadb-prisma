@@ -1,4 +1,6 @@
+import Slider from "@/components/home/Slider";
 import { Container } from "@/components/style/Container";
+import { Image as IImage } from "@/types/image";
 import { GetStaticPropsContext } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -54,8 +56,11 @@ const CenterSliderBox = styled.div`
     flex: 0.6;
     width: 100%;
     height: 100%;
+    border-width: 2px;
+    border-style: solid;
+    border-image: linear-gradient(to right, #f00, #0f0, #00f) 1;
     background-color: #fff;
-    border-radius: 1rem;
+    border-radius: 16px;
     box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
     overflow: hidden;
     position: relative;
@@ -78,12 +83,9 @@ const Placeholder = styled.span`
   font-size: 0.8rem;
 `
 
-interface Image {
-  url: string;
-  id: string;
-}
+
 interface Props {
-  images: Image[];
+  images: IImage[];
 }
 
 export default function Home({images} : Props) {
@@ -100,9 +102,7 @@ export default function Home({images} : Props) {
       
         <CenterSliderBox>
         <p>S3 Uploaded Image Carousel</p>    
-          {images.map((image) => (
-            <Image key={image.id} width={160} height={160} src={image.url} alt="" />
-          ))}
+          <Slider images={images} />
         </CenterSliderBox>
       <StyledRNB>
         <Placeholder>maybe it will place some post that has many favorite or read</Placeholder>
@@ -119,6 +119,7 @@ export const getStaticProps = async (context:GetStaticPropsContext) => {
   return {
     props: {
       images: data
-    }
+    },
+    revalidate: 10,
   } ;
 }

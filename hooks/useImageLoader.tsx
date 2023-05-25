@@ -4,8 +4,6 @@ import React, { useCallback, useState } from 'react'
 
 const S3_URL = 'https://kmsstorage.s3.ap-northeast-2.amazonaws.com/'
 
-
-
 export default function useImageLoader() {
 	const [file, setFile] = useState<File | null>(null);
 	const [imageUrl,setImageUrl] = useState<string | null>(null);
