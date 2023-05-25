@@ -37,30 +37,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         case 'GET':
             break;
         case 'POST':
-
             try {
            	  const url = await s3.getSignedUrlPromise('putObject', fileParams);
             	res.json( { message:'URL 변경을 완료하였습니다.', url });    
             } catch (error) {
               res.status(400).json({ error });  
             }
-            
             break;
         case 'PUT':
-						// try {
-						// 	const file = req.body.file;
-						// 	await fetch(req.body.url, {
-						// 		headers: {
-						// 			'Content-Type': file.type,
-						// 			'Access-Control-Allow-Origin': '*'
-						// 		},
-						// 		body: file,
-						// 	})
-						// 		res.json({ message: '업로드를 완료하였습니다.' });
-							
-						// } catch (error) {
-						// 	res.status(400).json({ error });
-						// }
 						
             break;
         case 'PATCH':

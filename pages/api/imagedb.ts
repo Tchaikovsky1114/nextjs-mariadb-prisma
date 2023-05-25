@@ -8,14 +8,17 @@ const prisma = new PrismaClient();
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
     switch(req.method) {
+        
         case 'GET':
-            try {
+            
+        try {
                 const imageUrls = await prisma.imageUrls.findMany();
                 res.json(imageUrls);
             } catch (error) {
-                
+                res.status(400).json({ error });
             }
             break;
+
         case 'POST':
             
             try {
@@ -30,6 +33,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 res.status(400).json({ error });
             }
             break;
+
         case 'PUT':
             break;
         case 'PATCH':
