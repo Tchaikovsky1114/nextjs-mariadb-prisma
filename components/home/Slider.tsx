@@ -14,7 +14,7 @@ interface Props {
 
 export default function Slider({images}: Props) {
     const [opacities, setOpacities] = React.useState<number[]>([])
-    const [options, setOptions] = React.useState<any>({});
+
     const [sliderRef,internalSlider] = useKeenSlider<HTMLDivElement>({
         initial: 0,
         slides: images.length,
@@ -24,7 +24,7 @@ export default function Slider({images}: Props) {
           setOpacities(new_opacities)
         },
         defaultAnimation: {
-            duration: 5000, 
+            duration: 10000, 
         }
     })
 
@@ -32,7 +32,7 @@ useEffect(() => {
     if(!sliderRef) return;
     setInterval(() => {    
         internalSlider.current?.next()
-    }, 3000)
+    }, 10000)
 }, [sliderRef,internalSlider])
 
   return (
@@ -43,7 +43,7 @@ useEffect(() => {
             key={image.id}
             className={`${classes.fader__slide}`}
             style={{opacity:opacities[idx]}}>               
-                <Image width={1000} height={300} src={image.url} alt='helloworld'  />
+                <Image width={1000} height={300} src={image.url} alt='helloworld' style={{objectFit:'fill'}} />
                 <p>{image.id}</p>
             </div>
         ))}

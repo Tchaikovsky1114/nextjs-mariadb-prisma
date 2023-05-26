@@ -47,38 +47,47 @@ const StyledRNB = styled.div`
     }
 `
 const CenterSliderBox = styled.div`
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    align-self: center;
-    justify-content: center;
-    align-items: center;
-    flex: 0.6;
-    width: 100%;
-    height: 100%;
-    border-width: 2px;
-    border-style: solid;
-    border-image: linear-gradient(to right, #f00, #0f0, #00f) 1;
-    background-color: #fff;
-    border-radius: 16px;
-    box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
-    overflow: hidden;
-    position: relative;
-    padding: 1rem;
-    gap: 1rem;
-    padding-top: 4rem;
-    p {
-        top:16px;
-        position: absolute;
-        font-size: 1.5rem;
-        font-weight: bold;
-        color: #000;
-        text-decoration: none;
-        &:hover {
-            color: #007bff;
-        }
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  justify-content: center;
+  align-items: center;
+  flex: 0.6;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  padding: 1rem;
+  gap: 1rem;
+  padding-top: 4rem;
+  p {
+    top: 16px;
+    position: absolute;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #000;
+    text-decoration: none;
+    &:hover {
+      color: #007bff;
     }
+  }
 `
+const GradientBorder = styled.div`
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  z-index: 0;
+  border-radius: 10px;
+  background: linear-gradient(to right, rgb(173, 101, 255), rgb(255, 0, 189), rgb(0, 255, 247));
+  background-clip: padding-box;
+  opacity: 0.5;
+`;
 const Placeholder = styled.span`
   font-size: 0.8rem;
 `
@@ -101,6 +110,7 @@ export default function Home({images} : Props) {
       </StyledLNB>
       
         <CenterSliderBox>
+          <GradientBorder />
         <p>S3 Uploaded Image Carousel</p>    
           <Slider images={images} />
         </CenterSliderBox>

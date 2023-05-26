@@ -16,7 +16,7 @@ export default function useImageLoader() {
 
 	const generateImageUrl = useCallback( async () => {
       return await(
-        await imageRequest(httpMethod.POST,{name: file!.name, type: file!.type})('이미지 업로드에 실패하였습니다.')()).json()
+        await imageRequest(httpMethod.POST,JSON.stringify({name: file!.name, type: file!.type}))('이미지 업로드에 실패하였습니다.')()).json()
 	},[file])
 
 	const uploadFileToS3 = useCallback(async (url: string) => {
@@ -38,7 +38,8 @@ export default function useImageLoader() {
 	const postImageUrlToDB = useCallback(async () => {
 		if(!imageUrl) return;
     try {
-      const data = await (await imageUrlRequest(httpMethod.POST,{url:imageUrl})('이미지 URL 업로드에 실패하였습니다.')()).json();
+      const data = await (
+        await imageUrlRequest(httpMethod.POST,JSON.stringify({url:imageUrl}))('이미지 URL 업로드에 실패하였습니다.')()).json();
       alert(data.message);
     } catch (error) {
       alert(error);

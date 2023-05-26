@@ -1,11 +1,14 @@
 import { httpMethod } from "@/types/httpMethod";
 import { mutate } from "swr";
 
+
+
+
 export const httpRequest =
       (url: string) => 
       (method: httpMethod = httpMethod.GET,bodyObject: any = {}) =>
       (errorMessage: string = '요청이 실패하였습니다') =>
-      async (contentType: any = 'application/json') => {
+      async (contentType: string = 'application/json') => {
   try {
       const response = await fetch(url, {
           method,
@@ -13,7 +16,7 @@ export const httpRequest =
             'Content-Type': contentType,
             "Access-Control-Allow-Origin": '*',
           },
-          body: contentType === 'application/json' ? JSON.stringify(bodyObject) : bodyObject
+          body: bodyObject
         });
 
       if(url.startsWith('/api')){

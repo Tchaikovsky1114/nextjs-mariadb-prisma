@@ -13,7 +13,7 @@ export default function useTodoList() {
   const onSubmit = useCallback( () => {
     if(!value) return false;
     try {
-      todoRequest(httpMethod.POST,{title: value, content: 'text'})('투두 작성에 실패하였습니다.')()
+      todoRequest(httpMethod.POST,JSON.stringify({title: value, content: 'text'}))('투두 작성에 실패하였습니다.')()
       removeInputHandler()  
     } catch (error) {
       alert(error)
@@ -22,7 +22,7 @@ export default function useTodoList() {
 
   const onUpdate = useCallback((isCompleted: boolean,id: number) => {
     try {
-      todoRequest(httpMethod.PUT,{isCompleted:!isCompleted,id})('투두 업데이트에 실패하였습니다.')()  
+      todoRequest(httpMethod.PUT,JSON.stringify({isCompleted:!isCompleted,id}))('투두 업데이트에 실패하였습니다.')()  
     } catch (error) {
       alert(error);
     }
@@ -31,7 +31,7 @@ export default function useTodoList() {
   // onDelete와 같은 경우에는 httpRequest이후 mutate 메서드가 실행되어야 하기 때문에 부모 함수에도 async/await을 사용한다.
   const onDelete = useCallback(async (id: number) => {
     try {
-      await httpRequest('/api/todos?id=' + id)(httpMethod.DELETE,`/api/todos?id=${id}`)('투두 삭제에 실패하였습니다.')()
+      await httpRequest('/api/todos?id=' + id)(httpMethod.DELETE)('투두 삭제에 실패하였습니다.')()
       mutate('/api/todos')   
     } catch (error) {
       alert(error);
