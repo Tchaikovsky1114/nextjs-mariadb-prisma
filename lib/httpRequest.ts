@@ -1,9 +1,6 @@
 import { httpMethod } from "@/types/httpMethod";
 import { mutate } from "swr";
 
-
-
-
 export const httpRequest =
       (url: string) => 
       (method: httpMethod = httpMethod.GET,bodyObject: any = {}) =>
