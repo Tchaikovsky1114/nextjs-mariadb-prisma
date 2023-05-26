@@ -14,6 +14,7 @@ export default function PostEditor() {
   return (
     <div>
         <SunEditor
+        setAllPlugins
             setOptions={{
                 buttonList: [
                     ['undo', 'redo'],
@@ -31,8 +32,6 @@ export default function PostEditor() {
                     ['preview', 'print'],
                     ['save']
                 ],
-                
-                imageUploadUrl: 'http://localhost:3000/api/image',
                 imageUploadSizeLimit: 1024 * 1024 * 10,
                 defaultTag: 'div',
                 showPathLabel: false,
@@ -41,16 +40,21 @@ export default function PostEditor() {
                 width: '100%',
                 height: '100%',
                 placeholder: '내용을 입력해주세요',
-                callBackSave: (contents: string) => {console.log(contents)},
-                
-
+                imageWidth: "240px",
+                imageHeight: "auto",
+                imageAccept: 'image/*',
             }}
             
+            onImageUpload={(targetImgElement: HTMLImageElement, index: number, state: string, size ) => {
+                console.log(targetImgElement, index, state, size);
+            }}
             getSunEditorInstance={getSunEditorInstance}
             lang="ko"
             defaultValue='<p>Hello world!</p>'
             setContents='<p>Hello world!</p>'
             autoFocus
+            
+            
         />
     </div>
   )
