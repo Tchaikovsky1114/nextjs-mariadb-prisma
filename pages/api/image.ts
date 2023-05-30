@@ -38,6 +38,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             break;
         case 'POST':
             try {
+                // s3.createPresignedPost 
            	  const url = await s3.getSignedUrlPromise('putObject', fileParams);
             	res.json( { message:'URL 변경을 완료하였습니다.', url });    
             } catch (error) {

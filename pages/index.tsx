@@ -1,3 +1,5 @@
+
+
 import Slider from "@/components/home/Slider";
 import { Container } from "@/components/style/Container";
 import { Image as IImage } from "@/types/image";

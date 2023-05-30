@@ -15,7 +15,9 @@ export default function BoardPage() {
   return (
     <Container>
       <input type="text" placeholder='제목을 입력해주세요' />
-      <PostEditor />
+      <PostEditor
+        
+      />
     </Container>
   )
 }

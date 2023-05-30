@@ -6,14 +6,22 @@ const SunEditor = dynamic(() => import('suneditor-react'), { ssr: false });
 
 export default function PostEditor() {
     const editorRef = useRef<SunEditorCore>();
-
+    const contentsRef = useRef<string>();
+    
     const getSunEditorInstance = (sunEditor: SunEditorCore) => {
         editorRef.current = sunEditor;
     }
-
+    const SubmitPostHandler = () => {
+        if(editorRef.current) {
+            contentsRef.current = editorRef.current.getContents(true);
+            console.log(contentsRef.current);
+        }
+    }
+    // editorRef.current?.insertImage
   return (
     <div>
         <SunEditor
+        
         setAllPlugins
             setOptions={{
                 buttonList: [
@@ -43,6 +51,10 @@ export default function PostEditor() {
                 imageWidth: "240px",
                 imageHeight: "auto",
                 imageAccept: 'image/*',
+                callBackSave: (contents: string) => {
+                    console.log(contents)
+                },
+                
             }}
             
             onImageUpload={(targetImgElement: HTMLImageElement, index: number, state: string, size ) => {
@@ -53,9 +65,8 @@ export default function PostEditor() {
             defaultValue='<p>Hello world!</p>'
             setContents='<p>Hello world!</p>'
             autoFocus
-            
-            
         />
+        <button onClick={SubmitPostHandler}>클릭 시 내용 DB 전송!</button>
     </div>
   )
 }

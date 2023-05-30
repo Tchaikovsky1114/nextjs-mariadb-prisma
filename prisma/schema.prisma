@@ -41,6 +41,8 @@ model Comments {
   post      Posts    @relation(fields: [postId], references: [id])
 
   @@index([postId], map: "Comments_postId_fkey")
+  
+  
 }
 
 model Profile {
