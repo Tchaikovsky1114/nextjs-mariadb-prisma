@@ -98,7 +98,7 @@ const Placeholder = styled.span`
 interface Props {
   images: IImage[];
 }
-
+// https://busan-7beach.openapi.redtable.global/api/rstr?serviceKey=QortEntQF9x0RrVxVViYFIHX2DIWAPGcIplN9nWxPsMWRovcwxHz0JkvQ0caYtaW
 export default function Home({images}: InferGetStaticPropsType<typeof getStaticProps>) {
   console.log(images)
   return (
@@ -109,6 +109,7 @@ export default function Home({images}: InferGetStaticPropsType<typeof getStaticP
         <Link href="/todos">TodoList</Link>
         <Link href="/board">Board</Link>
         <Link href="/image-uploader">Image-UpLoader</Link>
+        <Link href="/busan-7beach">Busan-7Beach</Link>
       </StyledLNB>
       
         <CenterSliderBox>
