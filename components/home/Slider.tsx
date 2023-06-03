@@ -37,7 +37,6 @@ useEffect(() => {
 
   return (
     <div ref={sliderRef} className={`keen-slider ${classes.fader}`}>
-
         {images?.map((image,idx) => (
             <div
             key={image.id}
@@ -47,8 +46,6 @@ useEffect(() => {
                 <p>{image.id}</p>
             </div>
         ))}
-        
-        
     </div>
   )
 }

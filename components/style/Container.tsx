@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
 
 export const Container = styled.div`
+  min-height:'100vh';
   padding-top: 2.4rem;
   padding-left: 2rem;
   display: flex;

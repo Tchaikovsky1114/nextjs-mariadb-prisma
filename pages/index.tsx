@@ -3,13 +3,14 @@
 import Slider from "@/components/home/Slider";
 import { Container } from "@/components/style/Container";
 import { Image as IImage } from "@/types/image";
-import { GetStaticPropsContext } from "next";
+import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { styled } from "styled-components";
 
 const Center = styled.div`
     width: 100%;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -52,12 +53,11 @@ const CenterSliderBox = styled.div`
   position: relative;
   display: flex;
   flex-direction: row;
-  align-self: center;
+  align-self: flex-start;
   justify-content: center;
   align-items: center;
   flex: 0.6;
   width: 100%;
-  height: 100%;
   background-color: #fff;
   border-radius: 10px;
   overflow: hidden;
@@ -99,7 +99,7 @@ interface Props {
   images: IImage[];
 }
 
-export default function Home({images} : Props) {
+export default function Home({images}: InferGetStaticPropsType<typeof getStaticProps>) {
   console.log(images)
   return (
     <Container>
@@ -127,7 +127,6 @@ export default function Home({images} : Props) {
 export const getStaticProps = async (context:GetStaticPropsContext) => {
   const response = await fetch('http://localhost:3000/api/imagedb');
   const data = await response.json();
-  console.log('data',data);
   return {
     props: {
       images: data
