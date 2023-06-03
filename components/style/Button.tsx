@@ -2,6 +2,7 @@ import { MouseEvent } from 'react'
 import styled from 'styled-components'
 
 const StyledButton = styled.button`
+  min-width: 64px;
     height:auto;
   display: flex;
   justify-content: center;
@@ -20,7 +21,7 @@ const StyledButton = styled.button`
 
 interface Props {
     children: React.ReactNode
-    onClick: (e:MouseEvent<HTMLButtonElement>) => Promise<boolean | void>
+    onClick: (e:MouseEvent<HTMLButtonElement>) => Promise<boolean | void> | void
 }
 
 export default function Button({onClick,children}:Props) {
