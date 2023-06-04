@@ -4,7 +4,7 @@ import { styled } from 'styled-components'
 
 const StyledLabel = styled.label`
   font-size: 14px;
-  font-weight: bold;
+  font-weight: 400;
   // 글씨에 밑줄
   text-shadow: 2px 2px 2px #1faaeb, 2px 2px 2px #f36e21, 2px 2px 2px #ccc, 2px 2px 2px #fdfa24;
   text-underline-offset: 0.25rem;

@@ -24,6 +24,7 @@ const StyledInput = styled.input`
     background: linear-gradient(to right, #ffaa00, #f86942, #ff00ff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    font-size: 14px;
   }
 `
 
@@ -34,6 +35,7 @@ interface Props {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
   onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void
   required?: boolean
+  
 }
 
 export default function Input({type = 'text',placeholder,value,onChange,onKeyDown,required = false}: Props) {

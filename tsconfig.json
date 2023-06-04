@@ -21,6 +21,6 @@
       "kakao.maps.d.ts"
     ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/api/[...nextauth].js"],
   "exclude": ["node_modules"]
 }

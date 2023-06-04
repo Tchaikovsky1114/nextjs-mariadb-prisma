@@ -33,10 +33,10 @@ model post {
 }
 
 model profile {
-  id      Int     @id @default(autoincrement())
+  id      String  @id @default(cuid())
   gender  String?
   address String?
-  userId  Int     @unique(map: "Profile_userId_key")
+  userId  String  @unique(map: "Profile_userId_key")
   user    user    @relation(fields: [userId], references: [id], map: "Profile_userId_fkey")
 }
 
@@ -63,16 +63,50 @@ model todo {
   updatedAt   DateTime
 }
 
-model user {
-  id      Int      @id @default(autoincrement())
-  name    String?
-  email   String   @unique(map: "User_email_key")
-  password String
-  profile profile?
+model account {
+  id                String  @id
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+  user              user    @relation(fields: [userId], references: [id], onDelete: Cascade, map: "Account_userId_fkey")
+
+  @@unique([provider, providerAccountId], map: "Account_provider_providerAccountId_key")
+  @@index([userId], map: "Account_userId_fkey")
 }
 
-/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
-model test {
-  test       BigInt @id @default(autoincrement())
-  testString String @db.VarChar(100)
+model session {
+  id           String   @id
+  sessionToken String   @unique(map: "Session_sessionToken_key")
+  userId       String
+  expires      DateTime
+  user         user     @relation(fields: [userId], references: [id], onDelete: Cascade, map: "Session_userId_fkey")
+
+  @@index([userId], map: "Session_userId_fkey")
+}
+
+model user {
+  id            String    @id
+  name          String?
+  email         String?   @unique(map: "User_email_key")
+  emailVerified DateTime?
+  image         String?
+  account       account[]
+  profile       profile?
+  session       session[]
+}
+
+model verificationtoken {
+  identifier String
+  token      String   @unique(map: "VerificationToken_token_key")
+  expires    DateTime
+
+  @@unique([identifier, token], map: "VerificationToken_identifier_token_key")
 }
