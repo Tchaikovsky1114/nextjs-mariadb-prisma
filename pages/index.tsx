@@ -26,7 +26,6 @@ const StyledLNB = styled.div`
     width: fit-content;
     font-size: 1.5rem;
     font-weight: bold;
-    color: #000;
     text-decoration: none;
     &:hover {
         color: #007bff;
@@ -43,9 +42,9 @@ const StyledRNB = styled.div`
     width: fit-content;
     font-size: 1.5rem;
     font-weight: bold;
-    color: #000;
     text-decoration: none;
     &:hover {
+        cursor: pointer;
         color: #007bff;
     }
 `
@@ -70,10 +69,11 @@ const CenterSliderBox = styled.div`
     position: absolute;
     font-size: 1.5rem;
     font-weight: bold;
-    color: #000;
     text-decoration: none;
+
     &:hover {
-      color: #007bff;
+      cursor: pointer;
+      color: #2d63e2;
     }
   }
 `

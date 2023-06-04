@@ -12,18 +12,20 @@ import Layout from '@/components/layout';
 //   },
 // };
 
-const darkTheme = {
+const theme = {
   colors: {
-    accent: '#fcfc06',
-    text: "#ffffff",
-    link: "#0070f3",
+    accent: '#da435f',
+    // 검청색
+    primary: '#0e0c30',
+    link: "#2d63e2",
+    linkHover: "#044a99",
   },
 };
 
 export default function App({ Component, pageProps }: AppProps) {
 
   return (
-  <ThemeProvider theme={darkTheme}>
+  <ThemeProvider theme={theme}>
     <Layout>
   <Component {...pageProps}  />
   </Layout>

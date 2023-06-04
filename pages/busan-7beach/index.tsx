@@ -1,4 +1,5 @@
 import Button from '@/components/style/Button';
+import { Container } from '@/components/style/Container';
 import useRestaurant from '@/hooks/useRestaurant';
 import { restaurant } from '@prisma/client';
 import dynamic from 'next/dynamic';
@@ -7,15 +8,7 @@ import React, { useEffect, useState } from 'react';
 import { Map,MapMarker } from 'react-kakao-maps-sdk';
 import { styled } from 'styled-components';
 
-const Container = styled.div`
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem;
-`;
+
 
 const ButtonGroup = styled.div`
   display: flex;

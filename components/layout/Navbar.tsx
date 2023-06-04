@@ -16,10 +16,14 @@ const StyledNavbar = styled.nav`
   top: 0;
   left: 0;
   z-index: 100;
+  background: linear-gradient(aliceblue, 87%, teal);
   .logo {
+    color: #0e0c30;
     font-size: 30px;
     font-weight: 700;
-    color: #000;
+    a {
+      color: inherit;
+    }
   }
   .menu {
     display: flex;
@@ -28,9 +32,10 @@ const StyledNavbar = styled.nav`
     gap: 20px;
     
     .menu-item {
+      color: #0e0c30;
       font-size: 18px;
       font-weight: bold;
-      color: #000;
+      
       cursor: pointer;
       list-style-type: none;
       font-size: 14px;

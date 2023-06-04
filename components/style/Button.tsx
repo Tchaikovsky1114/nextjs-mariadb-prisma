@@ -8,6 +8,7 @@ const StyledButton = styled.button`
   justify-content: center;
   align-items: center;
   background: linear-gradient(45deg, #007bff, #00bfff);
+  box-shadow: 0 3px 5px 2px rgba(19, 170, 170, 0.8);
   border: none;
   border-radius: 4px;
   color: #fff;

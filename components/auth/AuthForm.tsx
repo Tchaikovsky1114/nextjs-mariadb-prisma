@@ -3,6 +3,7 @@ import Input from '../style/Input'
 import useInput from '@/hooks/useInput'
 import { Container } from '../style/Container';
 import { styled } from 'styled-components';
+import Label from '../style/Label';
 
 const StyledForm = styled.form`
   display: flex;
@@ -11,6 +12,10 @@ const StyledForm = styled.form`
   input {
     width: 100%;
   }
+  padding: 2rem;
+  border: 1px solid #141142;
+  border-radius: 10px;
+  background: linear-gradient(aliceblue,77%,teal);
 `
 
 export default function AuthForm() {
@@ -21,10 +26,14 @@ export default function AuthForm() {
   return (
     <Container>
       <StyledForm>
-      <Input type="email" value={emailValue} onChange={onEmailChange}  placeholder='이메일' />
-      <Input type="text" value={nameValue} onChange={onNameChange} placeholder='닉네임' />
-      <Input type="password" value={passwordValue} onChange={onPasswordChange}  placeholder='비밀번호' />
-      <Input type="password" value={passwordConfirmValue} onChange={onPasswordConfirmChange}  placeholder='비밀번호확인' />
+      <Label inputId='email' text='이메일' color="#141142" />
+      <Input type="email" value={emailValue} onChange={onEmailChange}  placeholder='이메일' required />
+      <Label inputId='name' text='닉네임' color="#141142" />
+      <Input type="text" value={nameValue} onChange={onNameChange} placeholder='닉네임'  required/>
+      <Label inputId='password' text='비밀번호' color="#141142" />
+      <Input type="passwordConfirm" value={passwordValue} onChange={onPasswordChange}  placeholder='비밀번호' required />
+      <Label inputId='email' text='비밀번호확인' color="#141142" />
+      <Input type="password" value={passwordConfirmValue} onChange={onPasswordConfirmChange}  placeholder='비밀번호확인' required />
       </StyledForm>
     </Container>
   )
