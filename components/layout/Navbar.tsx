@@ -34,8 +34,12 @@ const StyledNavbar = styled.nav`
       cursor: pointer;
       list-style-type: none;
       font-size: 14px;
+      padding: 8px 16px;
+      border: 1px solid transparent;
       &:hover {
         color: #2d63e2;
+        border: 1px solid #2d63e2;
+        border-radius: 8px;
       }
     }
   }
@@ -54,10 +58,10 @@ export default function Navbar() {
             <Link href="/busan-7beach">부산7BEACH</Link>
           </li>
           <li className="menu-item">
-            <Link href="/">About Me</Link>
+            <Link href="/about">About Me</Link>
           </li>
           <li className="menu-item">
-            <Link href="/">회원가입/로그인</Link>
+            <Link href="/auth">회원가입/로그인</Link>
           </li>
         </ul>
       </div>

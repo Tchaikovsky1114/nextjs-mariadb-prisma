@@ -67,5 +67,12 @@ model user {
   id      Int      @id @default(autoincrement())
   name    String?
   email   String   @unique(map: "User_email_key")
+  password String
   profile profile?
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model test {
+  test       BigInt @id @default(autoincrement())
+  testString String @db.VarChar(100)
 }

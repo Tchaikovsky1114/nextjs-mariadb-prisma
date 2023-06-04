@@ -12,6 +12,7 @@ export default async function handler(
     case 'GET':
       if (req.query.id) {
         try {
+
           const post = await prisma.todo.findUnique({
             where: {
               id: Number(req.query.id),
@@ -33,6 +34,7 @@ export default async function handler(
       }
     case 'POST':
       try {
+        
         await prisma.todo.create({
           data: {
             title: req.body.title,
