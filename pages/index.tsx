@@ -111,7 +111,6 @@ export default function Home({ images }: InferGetStaticPropsType<typeof getStati
         <Link href="/image-uploader">Image-UpLoader</Link>
         <Link href="/busan-7beach">Busan-7Beach</Link>
       </StyledLNB>
-      
         <CenterSliderBox>
           <GradientBorder />
         <p>S3 Uploaded Image Carousel</p>    

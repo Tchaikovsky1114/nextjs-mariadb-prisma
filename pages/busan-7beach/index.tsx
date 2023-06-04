@@ -30,7 +30,7 @@ interface Props {
 export default function BusanPage() {
   const [mapCenter, setMapCenter] = useState({ lat: 35.1798, lng: 129.07503 });
   const [mapLevel, setMapLevel] = useState(3);
-  const { getRestaurant,rstr,postRestaurant } = useRestaurant();
+  // const { getRestaurant,rstr,postRestaurant } = useRestaurant();
 
   useEffect(() => {
     const mapScript = document.createElement('script');
