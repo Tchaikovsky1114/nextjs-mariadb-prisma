@@ -1,7 +1,10 @@
 import Button from '@/components/style/Button';
+import useRestaurant from '@/hooks/useRestaurant';
+import { restaurant } from '@prisma/client';
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import React, { useEffect, useState } from 'react';
-import { Map, MapMarker } from 'react-kakao-maps-sdk';
+import { Map,MapMarker } from 'react-kakao-maps-sdk';
 import { styled } from 'styled-components';
 
 const Container = styled.div`
@@ -24,9 +27,11 @@ interface Props {
 
 }
 
-export default function BusanPage(props) {
+export default function BusanPage() {
   const [mapCenter, setMapCenter] = useState({ lat: 35.1798, lng: 129.07503 });
   const [mapLevel, setMapLevel] = useState(3);
+  const { getRestaurant,rstr,postRestaurant } = useRestaurant();
+
   useEffect(() => {
     const mapScript = document.createElement('script');
     mapScript.async = true;
@@ -34,13 +39,17 @@ export default function BusanPage(props) {
     document.head.appendChild(mapScript);
   }, []);
 
+  // useEffect(() => {
+  //   getRestaurant(8)
+  // }, [])
+  
   return (
-    <html>
+    <>
       <Head>
         <meta charSet="utf-8" />
         <title>Busan 7 Beach</title>
       </Head>
-
+      
       <Container>
         <Map
           center={mapCenter}
@@ -59,7 +68,10 @@ export default function BusanPage(props) {
           <Button onClick={() => setMapLevel(prev => prev + 1)}>+</Button>
           <Button onClick={() => setMapLevel(prev => prev - 1)}>-</Button>
         </ButtonGroup>
+
+        {/* <Button onClick={postRestaurant}>레스토랑정보 보내기</Button> */}
       </Container>
-    </html>
+      
+    </>
   );
 }

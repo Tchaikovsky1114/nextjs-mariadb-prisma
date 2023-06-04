@@ -99,8 +99,8 @@ interface Props {
   images: IImage[];
 }
 // https://busan-7beach.openapi.redtable.global/api/rstr?serviceKey=QortEntQF9x0RrVxVViYFIHX2DIWAPGcIplN9nWxPsMWRovcwxHz0JkvQ0caYtaW
-export default function Home({images}: InferGetStaticPropsType<typeof getStaticProps>) {
-  console.log(images)
+export default function Home({ images }: InferGetStaticPropsType<typeof getStaticProps>) {
+  
   return (
     <Container>
       <Center>
@@ -128,9 +128,10 @@ export default function Home({images}: InferGetStaticPropsType<typeof getStaticP
 export const getStaticProps = async (context:GetStaticPropsContext) => {
   const response = await fetch('http://localhost:3000/api/imagedb');
   const data = await response.json();
+  
   return {
     props: {
-      images: data
+      images: data,
     },
     revalidate: 10,
   } ;

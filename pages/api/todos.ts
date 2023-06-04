@@ -12,7 +12,7 @@ export default async function handler(
     case 'GET':
       if (req.query.id) {
         try {
-          const post = await prisma.todos.findUnique({
+          const post = await prisma.todo.findUnique({
             where: {
               id: Number(req.query.id),
             },
@@ -24,7 +24,7 @@ export default async function handler(
         break;
       } else {
         try {
-          const posts = await prisma.todos.findMany();
+          const posts = await prisma.todo.findMany();
           res.json(posts);
         } catch (error) {
           console.error(error);
@@ -33,13 +33,15 @@ export default async function handler(
       }
     case 'POST':
       try {
-        await prisma.todos.create({
+        await prisma.todo.create({
           data: {
             title: req.body.title,
             content: req.body.content,
             isCompleted: false,
-          },
-        });
+            updatedAt: new Date()
+          }
+        })
+
         res.json({ message: 'Post created successfully' });
         // cache된 데이터 갱신
         mutate('api/todos');
@@ -49,7 +51,7 @@ export default async function handler(
       break;
     case 'PUT':
       try {
-        await prisma.todos.update({
+        await prisma.todo.update({
           where: {
             id: parseInt(req.body.id),
           },
@@ -68,7 +70,7 @@ export default async function handler(
       break;
     case 'DELETE':
       try {
-        await prisma.todos.delete({
+        await prisma.todo.delete({
           where: {
             id: Number(req.query.id),
           },

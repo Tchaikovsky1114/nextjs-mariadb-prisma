@@ -13,17 +13,17 @@ model comments {
   postId    Int
   createdAt DateTime @default(now())
   updatedAt DateTime
-  posts     posts    @relation(fields: [postId], references: [id], map: "Comments_postId_fkey")
+  posts     post     @relation(fields: [postId], references: [id], map: "Comments_postId_fkey")
 
   @@index([postId], map: "Comments_postId_fkey")
 }
 
-model imageurls {
+model imageurl {
   id  Int    @id @default(autoincrement())
   url String
 }
 
-model posts {
+model post {
   id        Int        @id @default(autoincrement())
   title     String
   content   String
@@ -40,7 +40,21 @@ model profile {
   user    user    @relation(fields: [userId], references: [id], map: "Profile_userId_fkey")
 }
 
-model todos {
+model restaurant {
+  id                  Int     @id @default(autoincrement())
+  RSTR_ID             Int     @unique(map: "Restaurant_RSTR_ID_key")
+  RSTR_NM             String
+  RSTR_RDNMADR        String?
+  RSTR_LA             String
+  RSTR_LO             String
+  RSTR_TELNO          String?
+  BSNS_STATM_BZCND_NM String?
+  BSNS_LCNC_NM        String?
+  RSTR_INTRCN_CONT    String?
+  RSTR_LNNO_ADRES     String?
+}
+
+model todo {
   id          Int      @id @default(autoincrement())
   title       String
   content     String

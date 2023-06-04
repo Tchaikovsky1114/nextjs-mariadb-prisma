@@ -1,8 +1,9 @@
+import { S3_URL } from '@/constants/constants';
 import { httpRequest, imageRequest, imageUrlRequest } from '@/lib/httpRequest';
 import { httpMethod } from '@/types/httpMethod';
 import React, { useCallback, useState } from 'react'
 
-const S3_URL = 'https://kmsstorage.s3.ap-northeast-2.amazonaws.com/'
+
 
 export default function useImageLoader() {
 	const [file, setFile] = useState<File | null>(null);

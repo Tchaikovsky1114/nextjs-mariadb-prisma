@@ -12,7 +12,7 @@ export default async function handler(
     case 'GET':
       if (req.query.id) {
         try {
-          const post = await prisma.posts.findUnique({
+          const post = await prisma.post.findUnique({
             where: {
               id: Number(req.query.id),
             },
@@ -24,7 +24,7 @@ export default async function handler(
         break;
       } else {
         try {
-          const posts = await prisma.posts.findMany();
+          const posts = await prisma.post.findMany();
           res.json(posts);
         } catch (error) {
           console.error(error);
@@ -33,11 +33,12 @@ export default async function handler(
       }
     case 'POST':
       try {
-        await prisma.posts.create({
+        await prisma.post.create({
           data: {
             title: req.body.title,
             content: req.body.content,
-          },
+            updatedAt: new Date(),
+          }
         });
         res.json({ message: 'Post created successfully' });
         // cache된 데이터 갱신

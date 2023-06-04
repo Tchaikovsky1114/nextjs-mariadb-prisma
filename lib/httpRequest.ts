@@ -13,7 +13,7 @@ export const httpRequest =
             'Content-Type': contentType,
             "Access-Control-Allow-Origin": '*',
           },
-          body: bodyObject
+          body: method === httpMethod.GET ? null : bodyObject
         });
 
       if(url.startsWith('/api')){
@@ -21,6 +21,7 @@ export const httpRequest =
       }
         return response;
   } catch (error) {
+    console.log(error);
       throw Error(errorMessage)
   }
 }
@@ -28,5 +29,6 @@ export const httpRequest =
 export const todoRequest = httpRequest('/api/todos');
 export const imageRequest = httpRequest('/api/image');
 export const imageUrlRequest = httpRequest('/api/imagedb');
-
+export const markerRequest = httpRequest('/api/markers');
+export const restaurantRequest = httpRequest('/api/restaurant');
 
