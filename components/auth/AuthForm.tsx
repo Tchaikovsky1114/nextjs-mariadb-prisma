@@ -21,7 +21,6 @@ const StyledForm = styled.form`
   position: absolute;
   top: 15%;
   right: 5%;
-  
   z-index: 10;
   width: 300px;
   height: auto;
@@ -29,8 +28,14 @@ const StyledForm = styled.form`
   flex-direction: column;
   gap: 20px;
   
+  h3 {
+    font-size: 18px;
+    text-decoration: underline;
+    text-underline-offset: 0.25rem;
+  }
   input {
-    
+    outline: none;
+    caret-color: #fff;
     width: 100%;
   }
   padding: 2rem;
@@ -38,6 +43,17 @@ const StyledForm = styled.form`
   box-shadow: 0px 4px 4px #1411423f;
   border-radius: 10px;
   background: rgba(0,0,0,0.3);
+  button {
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    height: 48px;
+    background-color: inherit;
+    &:hover {
+      background-color: #2d63e27c;
+    }
+  }
+  
 `;
 
 export default function AuthForm() {
@@ -55,7 +71,8 @@ export default function AuthForm() {
         src={require('../../public/assets/ocean-video.mp4')}
       />
       <StyledForm>
-        <Label inputId="email" text="이메일" color="#2d277c" />
+        <h3>회원가입</h3>
+        <Label inputId="email" text="이메일" color="#fff" />
         <Input
           type="email"
           value={emailValue}
@@ -63,7 +80,7 @@ export default function AuthForm() {
           placeholder="이메일"
           required
         />
-        <Label inputId="name" text="닉네임" color="#2d277c" />
+        <Label inputId="name" text="닉네임" color="#fff" />
         <Input
           type="text"
           value={nameValue}
@@ -71,7 +88,7 @@ export default function AuthForm() {
           placeholder="닉네임"
           required
         />
-        <Label inputId="password" text="비밀번호" color="#2d277c" />
+        <Label inputId="password" text="비밀번호" color="#fff" />
         <Input
           type="passwordConfirm"
           value={passwordValue}
@@ -79,7 +96,7 @@ export default function AuthForm() {
           placeholder="비밀번호"
           required
         />
-        <Label inputId="email" text="비밀번호확인" color="#2d277c" />
+        <Label inputId="email" text="비밀번호확인" color="#fff" />
         <Input
           type="password"
           value={passwordConfirmValue}
@@ -87,6 +104,7 @@ export default function AuthForm() {
           placeholder="비밀번호확인"
           required
         />
+        <button>가입하기</button>
       </StyledForm>
     </>
   );
